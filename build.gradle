@@ -8,27 +8,19 @@ apply plugin: 'opensearch.yaml-rest-test'
 apply plugin: 'opensearch.pluginzip'
 apply plugin: 'opensearch.java-agent'
 
-def pluginName = 'rename'
-def pluginDescription = 'Custom plugin'
-def packagePath = 'org.example'
-def pathToPlugin = 'path.to.plugin'
-def pluginClassName = 'RenamePlugin'
-group = "RenameGroup"
+def pluginName = 'opensearch-token-count-query'
+def pluginDescription = 'OpenSearch plugin that implements a token_count query for server-side analysis'
+def packagePath = 'org.opensearch'
+def pathToPlugin = 'query.tokencount'
+def pluginClassName = 'TokenCountQueryPlugin'
+group = "org.opensearch"
+version = "0.1.0"
 
 java {
     targetCompatibility = JavaVersion.VERSION_21
     sourceCompatibility = JavaVersion.VERSION_21
 }
 
-tasks.register("preparePluginPathDirs") {
-    mustRunAfter clean
-    doLast {
-        def newPath = pathToPlugin.replace(".", "/")
-        mkdir "src/main/java/$packagePath/$newPath"
-        mkdir "src/test/java/$packagePath/$newPath"
-        mkdir "src/yamlRestTest/java/$packagePath/$newPath"
-    }
-}
 
 publishing {
     publications {
